@@ -1,0 +1,22 @@
+FROM node:16.20.2-alpine3.18
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+RUN yarn install --frozen-lockfile
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["yarn", "start"]
+
+
+## CAMBIOS:
+    # Dockerfile: cambios version de alpine a la 3.18
+    # Dockerfile: cambios version de node a la 16.20.2
+    # Dockerfile: agregado de COPY package.json yarn.lock ./
+    # Dockerfile: agregado de RUN yarn install --frozen-lockfile --ignore-engines
+    # Dockerfile: quitado de nginx para modo dev
+    # Dockerfile: uso de CMD y cambio EXPOSE 3000
