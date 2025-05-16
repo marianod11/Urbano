@@ -7,6 +7,7 @@ import { Content } from './content.entity';
 import { ContentQuery } from './content.query';
 import * as fs from 'fs';
 import * as path from 'path';
+import { WhereConditions } from 'src/interfaces/interfaces';
 
 @Injectable()
 export class ContentService {
@@ -80,7 +81,7 @@ export class ContentService {
       pageSize = 10
     } = contentQuery;
 
-    const whereConditions: any = { courseId }; 
+    const whereConditions: WhereConditions = { courseId }; 
 
     if (name) {
       whereConditions.name = ILike(`%${name}%`);

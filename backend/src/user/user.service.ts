@@ -7,6 +7,7 @@ import { User } from './user.entity';
 import { UserQuery } from './user.query';
 import { CourseService } from '../course/course.service';
 import { Course } from '../course/course.entity';
+import { WhereConditions } from 'src/interfaces/interfaces';
 
 @Injectable()
 export class UserService {
@@ -41,7 +42,7 @@ export class UserService {
    
     } = userQuery;
 
-    const whereConditions: any = {};
+    const whereConditions: WhereConditions = {};
 
     if (firstName) {
       whereConditions.firstName = ILike(`%${firstName}%`);

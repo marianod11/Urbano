@@ -1,12 +1,14 @@
 
 import { HttpException, HttpStatus, Injectable, forwardRef, Inject } from '@nestjs/common';
-import { ILike } from 'typeorm';
+import {  ILike } from 'typeorm';
 import { CreateCourseDto, UpdateCourseDto } from './course.dto';
 import { Course } from './course.entity';
 import { CourseQuery } from './course.query';
 import * as fs from 'fs';
 import * as path from 'path';
 import { UserService } from '../user/user.service';
+import { WhereConditions } from '../interfaces/interfaces';
+
 
 
 @Injectable()
@@ -36,7 +38,7 @@ export class CourseService {
       inscribed = false
     } = courseQuery;
 
-    const whereConditions: any = {};
+    const whereConditions: WhereConditions = {};
 
     if (name) {
       whereConditions.name = ILike(`%${name}%`);
