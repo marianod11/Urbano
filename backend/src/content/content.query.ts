@@ -1,4 +1,4 @@
-import { SortBy, SortOrder } from 'src/interfaces/interfaces';
+import { SortBy, SortOrder } from 'src/enums/sort.enum';
 
 
 export class ContentQuery {
