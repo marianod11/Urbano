@@ -8,6 +8,10 @@ import { ContentQuery } from './content.query';
 import * as fs from 'fs';
 import * as path from 'path';
 import { WhereConditions } from 'src/interfaces/interfaces';
+import { SortBy, SortOrder } from 'src/enums/sort.enum';
+
+
+type Order = Partial<Record<SortBy, SortOrder>>;
 
 @Injectable()
 export class ContentService {
@@ -75,8 +79,8 @@ export class ContentService {
       name,
       description,
       dateCreated,
-      sortBy = 'name',
-      sortOrder = 'ASC',
+      sortBy = SortBy.name,
+      sortOrder = SortOrder.ASC,
       page = 1,
       pageSize = 10
     } = contentQuery;
@@ -94,8 +98,11 @@ export class ContentService {
     if (dateCreated) {
       whereConditions.dateCreated = dateCreated;
     }
+    
+    
 
-    const order: any = {};
+
+    const order: Order = {};
     order[sortBy] = sortOrder;
 
     const skip = (page - 1) * pageSize;

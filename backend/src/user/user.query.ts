@@ -1,11 +1,13 @@
+import { SortBy, SortOrder } from 'src/enums/sort.enum';
+
 export class UserQuery {
   firstName?: string;
   lastName?: string;
   username?: string;
   role?: string;
 
-  sortBy?: 'name' | 'description' | 'dateCreated';
-  sortOrder?: 'ASC' | 'DESC';
+  sortBy?: SortBy;
+  sortOrder?: SortOrder;
 
   page?: number;
   pageSize?: number;

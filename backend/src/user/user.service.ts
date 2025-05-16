@@ -8,6 +8,9 @@ import { UserQuery } from './user.query';
 import { CourseService } from '../course/course.service';
 import { Course } from '../course/course.entity';
 import { WhereConditions } from 'src/interfaces/interfaces';
+import { SortBy, SortOrder } from 'src/enums/sort.enum';
+
+type Order = Partial<Record<SortBy, SortOrder>>;
 
 @Injectable()
 export class UserService {
@@ -35,8 +38,8 @@ export class UserService {
       lastName,
       username,
       role,
-      sortBy = 'firstName', 
-      sortOrder = 'ASC',      
+      sortBy = SortBy.firstName, 
+      sortOrder = SortOrder.ASC,   
       page = 1,             
       pageSize = 10      
    
@@ -60,16 +63,9 @@ export class UserService {
       whereConditions.role = role; 
     }
 
-    const order: any = {};
+    const order: Order = {};
 
-    const sortFieldMap = {
-      name: 'firstName',          
-      description: 'lastName',    
-      dateCreated: 'createdAt'    
-    };
-
-    const actualSortField = sortFieldMap[sortBy] || sortBy;
-    order[actualSortField] = sortOrder;
+    order[sortBy] = sortOrder;
 
     const skip = (page - 1) * pageSize;
 

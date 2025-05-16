@@ -8,9 +8,11 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { UserService } from '../user/user.service';
 import { WhereConditions } from '../interfaces/interfaces';
+import { SortBy, SortOrder } from 'src/enums/sort.enum';
 
 
 
+type Order = Partial<Record<SortBy, SortOrder>>;
 @Injectable()
 export class CourseService {
   constructor(@Inject(forwardRef(() => UserService)) private readonly userService: UserService,) {}
@@ -29,8 +31,8 @@ export class CourseService {
       name,
       description,
       dateCreated,
-      sortBy = 'name',
-      sortOrder = 'ASC',
+      sortBy = SortBy.name,
+      sortOrder = SortOrder.ASC,
       page = 1,
       pageSize = 10,
       userId,
@@ -52,7 +54,7 @@ export class CourseService {
       whereConditions.dateCreated = dateCreated;
     }
 
-    const order: any = {};
+    const order: Order = {};
     order[sortBy] = sortOrder;
 
     const skip = (page - 1) * pageSize;

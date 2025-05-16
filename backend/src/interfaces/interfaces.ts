@@ -10,3 +10,5 @@ export interface WhereConditions {
   role?: string;
   courseId?: string;
 }
+
+
